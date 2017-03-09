@@ -44,7 +44,7 @@ class Deck extends BaseElement {
   }
 
   static get observedAttributes () {
-    return ['auto', 'delay', 'active']
+    return ['autoplay', 'delay', 'active']
   }
 
   get active () {
@@ -56,13 +56,13 @@ class Deck extends BaseElement {
     this.setAttribute('active', `${idx}`)
   }
 
-  get auto () {
-    return this.hasAttribute('auto')
+  get autoplay () {
+    return this.hasAttribute('autoplay')
   }
 
-  set auto (value) {
-    value ? this.setAttribute('auto', ``)
-          : this.removeAttribute('auto')
+  set autoplay (value) {
+    value ? this.setAttribute('autoplay', ``)
+          : this.removeAttribute('autoplay')
   }
 
   get interval () {
@@ -80,7 +80,7 @@ class Deck extends BaseElement {
   }
 
   renderCallback () {
-    this.autoMode()
+    this.autoplayMode()
     setTimeout(this.activateSlide.bind(this, this.active), 0)
   }
 
@@ -89,12 +89,12 @@ class Deck extends BaseElement {
   }
 
   attachNavigation () {
-    document.addEventListener('click', this.next.bind(this))
+    this.addEventListener('click', this.next.bind(this))
     document.addEventListener('keydown', this.handleKeydown.bind(this))
   }
 
-  autoMode () {
-    if (this.auto) {
+  autoplayMode () {
+    if (this.autoplay) {
       clearInterval(this.timer)
       this.timer = setInterval(this.next.bind(this), this.interval * 1000)
     }
@@ -145,7 +145,7 @@ class Deck extends BaseElement {
   }
 
   disconnectedCallback () {
-    document.removeEventListener('click', this.next)
+    this.removeEventListener('click', this.next)
     document.removeEventListener('keydown', this.handleKeydown)
   }
 }
@@ -252,8 +252,83 @@ class AsciiFace extends BaseElement {
   }
 }
 
+class FullScreen extends BaseElement {
+  constructor () {
+    super()
+
+    this.timeout = null
+  }
+
+  static get observedAttributes () {
+    return ['delay']
+  }
+
+  get delay () {
+    return this.getAttribute('delay') || 5
+  }
+
+  onConnect () {
+    this.classList.add('animated', 'fadeIn')
+    this.addEventListener('click', this.toggleFullScreen.bind(this))
+    document.addEventListener('mousemove', this.isPointerIdle.bind(this))
+    this.isPointerIdle()
+  }
+
+  renderCallback () {
+    this.textContent = '◱'
+    this.style.cssText = this.buildStyles()
+  }
+
+  buildStyles () {
+    return `
+      color: #FFF;
+      position: fixed;
+      bottom: 60px;
+      right: 60px;
+      font-size: 100px;
+      z-index: 1000;
+      cursor: pointer;
+      display: block;
+      line-height: 72px;
+    `
+  }
+
+  toggleFullScreen () {
+    if (!document.webkitFullscreenElement) {
+      document.body.webkitRequestFullscreen()
+    } else {
+      if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen()
+      }
+    }
+  }
+
+  isPointerIdle () {
+    clearTimeout(this.timeout)
+    this.showFullScreenToggle()
+    this.timeout = setTimeout(this.hideFullScreenToggle.bind(this), this.delay * 1000)
+  }
+
+  hideFullScreenToggle () {
+    this.classList.remove('fadeIn')
+    this.classList.add('fadeOut')
+  }
+
+  showFullScreenToggle () {
+    this.classList.add('fadeIn')
+    this.classList.remove('fadeOut')
+  }
+
+  disconnectedCallback () {
+    clearTimeout(this.timeout)
+    this.removeEventListener('click', this.toggleFullScreen)
+    document.removeEventListener('mousemove', this.isPointerIdle)
+  }
+}
+
 // DEFINITION
 
 customElements.define('x-deck', Deck)
 customElements.define('x-slide', Slide)
 customElements.define('x-ascii', AsciiFace)
+customElements.define('x-fullscreen', FullScreen)
