@@ -1,0 +1,174 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/daneden/animate.css/master/animate.css">
+    <link rel="stylesheet" href="slides.css">
+    <title>Using Custom Elements: From zero to foo</title>
+  </head>
+  <body>
+
+    <x-deck>
+
+      <x-slide class="teal" in="zoomIn" out="zoomOut">
+        <section class="center">
+            <h1 class="big">From zero to <code>&lt;foo&gt;&lt;/foo&gt;</code></h1>
+            <p>Introduction to Custom Elements v1</p>
+            <x-ascii face="dance" size="150"></x-ascii>
+        </section>
+      </x-slide>
+
+      <x-slide class="blue" in="zoomIn" out="bounceOut">
+        <section>
+            <h2>Hello</h2>
+            <h2>Cześć</h2>
+            <h2>прывітанне</h2>
+            <h2>привет</h2>
+            <h2>नमस्ते</h2>
+            <h2>你好</h2>
+        </section>
+        <section class="center">
+          <h1 class="huge">Hola <x-ascii face="shrug"></x-ascii></h1>
+          <h4>I'm Ricardo Casares</h4>
+          <p>Senior Software Engineer @ EPAM</p>
+        </section>
+      </x-slide>
+
+      <x-slide class="lime">
+        <section class="center">
+            <x-ascii face="what" size="150"></x-ascii>
+            <h1>Custom elements you say?</h1>
+        </section>
+      </x-slide>
+
+      <x-slide class="green">
+        <section>
+            <h1>V1 Specification</h1>
+            <p>W3C Editor's Draft 13 February 2017</p>
+        </section>
+        <section>
+            <pre>
+              <code class="javascript">
+class Foo extends HTMLElement {
+  adoptedCallback() {
+    // called when adopted on a new document
+  }
+
+  connectedCallback () {
+    // called when the element is connected to DOM
+  }
+
+  attributeChangedCallback (attr, prev, curr) {
+    // called when any attribute changes
+    // triggers before connectedCallback
+  }
+
+  disconnectedCallback () {
+    // called when the element is disconnected from DOM
+  }
+}
+              </code>
+            </pre>
+        </section>
+      </x-slide>
+
+      <x-slide class="indigo">
+        <section>
+            <h1>Autonomous elements</h1>
+            <ul class="careless">
+              <li>Do it all by yourself</li>
+              <li>No default accessibility</li>
+              <li>No default behaviors</li>
+              <li>No default visual styles
+                <br />
+                <br />
+                <pre><code class="html">
+&lt;foo tabindex="1" aria-label="foo" aria-disabled etc... &gt;
+
+// To implement all this is hard and sometimes impossible
+
+&lt;/foo&gt;
+              </code></pre></li>
+            </ul>
+        </section>
+        <section class="center">
+          <x-ascii face="careless" size="200"></x-ascii>
+        </section>
+      </x-slide>
+
+      <x-slide class="pink">
+        <section>
+            <h1>Customized built-ins</h1>
+            <ul class="love">
+              <li>Allow reuse of existing HTML elements behaviors</li>
+              <li>Provide already implemented accessibility features</li>
+              <li>You can't inspect element attributes or children here
+                <br>
+                <br>
+                <pre><code class="javascript">class Foo extends HTMLButtonElement {}</code></pre>
+                <br>
+                <pre><code class="javascript">customElements.define('x-foo', Foo, {extends: 'button'})</code></pre>
+                <br>
+                <pre><code class="javascript">const fooButton = document.createElement('button', {is: 'x-foo'})</code></pre>
+                <br>
+                <pre><code class="html">&lt;button is="x-foo"&gt;&lt;/button&gt;</code></pre>
+              </li>
+            </ul>
+        </section>
+        <section class="center">
+          <x-ascii face="love" size="140"></x-ascii>
+        </section>
+      </x-slide>
+      
+      <x-slide class="red">
+        <section>
+            <h1>Constructor gotchas</h1>
+            <ul class="gotcha">
+              <li>If you use a <code>constructor()</code> you must call <code>super()</code> first</li>
+              <li>You can't <code>return</code> anything else than <code>this</code></li>
+              <li>You can't inspect element attributes or children here</li>
+            </ul>
+            <p>Basically you can't do much other than initialize properties and/or observers here</p>
+        </section>
+        <section>
+          <x-ascii face="disapprove" size="200"></x-ascii>
+        </section>
+      </x-slide>
+
+      <x-slide class="yellow">
+        <section>
+            <h1>Browser support</h1>
+            <img src="assets/support.png" alt="Browser Support">
+            <img src="assets/mobile.png" alt="Browser Support">
+        </section>
+      </x-slide>
+      
+      <x-slide class="yellow">
+        <section class="center">
+            <x-ascii face="cry" size="300"></x-ascii>
+        </section>
+      </x-slide>
+
+      <x-slide class="green" in="rotateIn" out="rotateOut">
+        <section class="center">
+            <x-ascii face="shrug" size="200"></x-ascii>
+            <h1>Polyfill all the things!</h1>
+        </section>
+      </x-slide>
+
+      <x-slide class="violet" in="rotateIn" out="rotateOut">
+        <section class="center">
+            <x-ascii face="bear" size="200"></x-ascii>
+            <h1>Thank you!</h1>
+        </section>
+      </x-slide>
+
+    </x-deck>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/languages/javascript.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="index.js"></script>
+  </body>
+</html>

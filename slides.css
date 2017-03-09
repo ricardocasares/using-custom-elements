@@ -1,0 +1,154 @@
+html, *, *::after, *::before {
+    box-sizing: border-box;
+}
+
+body {
+    background: black;
+    font-size: 24px;
+}
+
+/* CUSTOM ELEMENTS */
+
+x-slide {
+    display: flex;
+    background: black;
+    color: white;
+    font-family: BlinkMacSystemFont, sans-serif;
+    border: 30px solid white;
+    padding: 100px;
+    position: relative;
+}
+
+x-slide section {
+    flex-grow: 1;
+}
+
+/* COLORS */
+
+.blue {
+    color: #72c3fc;
+    border-color: #72c3fc;
+}
+
+.red {
+    color: #ff6b6b;
+    border-color: #ff6b6b;
+}
+
+.grape {
+    color: #ae3ec9;
+    border-color: #ae3ec9;
+}
+
+.indigo {
+    color: #91a7ff;
+    border-color: #91a7ff;
+}
+
+.blue {
+    color: #228ae6;
+    border-color: #228ae6;
+}
+
+.green {
+    color: #69db7c;
+    border-color: #69db7c;
+}
+
+.cyan {
+    color: #22b8cf;
+    border-color: #22b8cf;
+}
+
+.teal {
+    color: #12b886;
+    border-color: #12b886;
+}
+
+.yellow {
+    color: #fcc419;
+    border-color: #fcc419;
+}
+
+.lime {
+    color: #d8f5a2;
+    border-color: #d8f5a2;
+}
+
+.pink {
+    color: #f783ac;
+    border-color: #f783ac;
+}
+
+.violet {
+    color: #d0bfff;
+    border-color: #d0bfff;
+}
+
+
+/* RESETS */
+
+pre {
+    margin: 0;
+}
+
+code {
+    border: 2px solid #666;
+    color: #666;
+    padding: 0 5px;
+    padding-bottom: 3px;
+    margin: 0 5px;
+    border-radius: 5px;
+}
+
+.hljs {
+    font-size: .8em;
+    border-radius: 5px;
+    padding: 5px 20px;
+    border: none;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    margin: 0;
+    margin-bottom: 20px;
+    list-style-type: none;
+}
+
+img {
+    width: 100%;
+    min-width: 100%;
+}
+
+/* TYPOGRAPHY */
+
+.big {
+    font-size: 300%;
+}
+.huge {
+    font-size: 500%;
+}
+
+.center {
+    text-align: center;
+}
+
+li::before {
+    color: #666;
+    margin-right: 10px;
+}
+
+.gotcha li::before {
+    content: 'ಠ_ಠ';
+}
+
+.love li::before {
+    content: '♥‿♥';
+}
+
+.careless li::before {
+    content: '◔_◔';
+}
