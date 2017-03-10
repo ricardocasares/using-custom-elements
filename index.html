@@ -102,8 +102,7 @@ class Foo extends HTMLElement {
             <ul class="love">
               <li>Allow reuse of existing HTML elements behaviors</li>
               <li>Provide already implemented accessibility features</li>
-              <li>You can't inspect element attributes or children here
-              </li>
+              <li>Allow custom behaviour, hooks, and prototype chain</li>
             </ul>
             <pre><code class="javascript">
 class Foo extends HTMLButtonElement {}
@@ -126,11 +125,13 @@ const fooButton = document.createElement('button', {is: 'x-foo'})
         <section>
             <h1 class="upper">Constructor gotchas</h1>
             <ul class="gotcha">
-              <li>If you use a <code>constructor()</code> you must call <code>super()</code> first</li>
-              <li>You can't <code>return</code> anything else than <code>this</code></li>
-              <li>You can't inspect element attributes or children here</li>
+              <li>You must call <code>super()</code> first</li>
+              <li>You can't <code>return</code> anything, except for <code>this</code></li>
+              <li>You can't inspect element attributes or children</li>
+              <li>You can't add any attributes or children</li>
+              <li>Just use it to initialize default state and/or observers</li>
+              <li>All work should be deferred to <code>connectedCallback()</code>, but be aware this method can be called multiple times</li>
             </ul>
-            <p>Basically you can't do much other than initialize properties and/or observers here</p>
         </section>
         <section>
           <x-ascii face="disapprove" size="200"></x-ascii>
