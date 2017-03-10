@@ -150,8 +150,17 @@ p, li {
 .big {
     font-size: 260%;
 }
+
 .huge {
     font-size: 500%;
+}
+
+.normal {
+    font-weight: normal;
+}
+
+.light {
+    font-weight: 100;
 }
 
 .center {
