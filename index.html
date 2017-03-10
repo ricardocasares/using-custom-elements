@@ -9,13 +9,13 @@
   </head>
   <body>
     <x-fullscreen></x-fullscreen>
-    
+
     <x-deck>
 
       <x-slide class="teal" in="zoomIn" out="zoomOut">
         <section class="center">
             <h1 class="big">From zero to <code>&lt;foo&gt;&lt;/foo&gt;</code></h1>
-            <p>Introduction to Custom Elements v1</p>
+            <h2 class="upper">Introduction to Custom Elements v1</h2>
             <x-ascii face="dance" size="150"></x-ascii>
         </section>
       </x-slide>
@@ -31,21 +31,21 @@
         </section>
         <section class="center">
           <h1 class="huge">Hola <x-ascii face="shrug"></x-ascii></h1>
-          <h4>I'm Ricardo Casares</h4>
-          <p>Senior Software Engineer @ EPAM</p>
+          <h4 class="upper">I'm Ricardo Casares</h4>
+          <p class="upper">Senior Software Engineer @ EPAM</p>
         </section>
       </x-slide>
 
       <x-slide class="lime">
         <section class="center">
             <x-ascii face="what" size="150"></x-ascii>
-            <h1>Custom elements you say?</h1>
+            <h1 class="upper">Custom elements you say?</h1>
         </section>
       </x-slide>
 
       <x-slide class="green">
         <section>
-            <h1>V1 Specification</h1>
+            <h1 class="upper">V1 Specification</h1>
             <p>W3C Editor's Draft 13 February 2017</p>
         </section>
         <section>
@@ -76,22 +76,20 @@ class Foo extends HTMLElement {
 
       <x-slide class="indigo">
         <section>
-            <h1>Autonomous elements</h1>
+            <h1 class="upper">Autonomous elements</h1>
             <ul class="careless">
               <li>Do it all by yourself</li>
               <li>No default accessibility</li>
               <li>No default behaviors</li>
-              <li>No default visual styles
-                <br />
-                <br />
-                <pre><code class="html">
+              <li>No default visual styles</li>
+            </ul>
+            <pre><code class="html">
 &lt;foo tabindex="1" aria-label="foo" aria-disabled etc... &gt;
 
 // To implement all this is hard and sometimes impossible
 
 &lt;/foo&gt;
-              </code></pre></li>
-            </ul>
+            </code></pre>
         </section>
         <section class="center">
           <x-ascii face="careless" size="200"></x-ascii>
@@ -100,22 +98,24 @@ class Foo extends HTMLElement {
 
       <x-slide class="pink">
         <section>
-            <h1>Customized built-ins</h1>
+            <h1 class="upper">Customized built-ins</h1>
             <ul class="love">
               <li>Allow reuse of existing HTML elements behaviors</li>
               <li>Provide already implemented accessibility features</li>
               <li>You can't inspect element attributes or children here
-                <br>
-                <br>
-                <pre><code class="javascript">class Foo extends HTMLButtonElement {}</code></pre>
-                <br>
-                <pre><code class="javascript">customElements.define('x-foo', Foo, {extends: 'button'})</code></pre>
-                <br>
-                <pre><code class="javascript">const fooButton = document.createElement('button', {is: 'x-foo'})</code></pre>
-                <br>
-                <pre><code class="html">&lt;button is="x-foo"&gt;&lt;/button&gt;</code></pre>
               </li>
             </ul>
+            <pre><code class="javascript">
+class Foo extends HTMLButtonElement {}
+
+customElements.define('x-foo', Foo, {extends: 'button'})
+
+const fooButton = document.createElement('button', {is: 'x-foo'})
+              </code></pre>
+            
+              <pre><code class="html">
+&lt;button is="x-foo"&gt;&lt;/button&gt;
+              </code></pre>
         </section>
         <section class="center">
           <x-ascii face="love" size="140"></x-ascii>
@@ -124,7 +124,7 @@ class Foo extends HTMLElement {
       
       <x-slide class="red">
         <section>
-            <h1>Constructor gotchas</h1>
+            <h1 class="upper">Constructor gotchas</h1>
             <ul class="gotcha">
               <li>If you use a <code>constructor()</code> you must call <code>super()</code> first</li>
               <li>You can't <code>return</code> anything else than <code>this</code></li>
@@ -137,11 +137,73 @@ class Foo extends HTMLElement {
         </section>
       </x-slide>
 
-      <x-slide class="yellow">
+      <x-slide class="orange">
         <section>
-            <h1>Browser support</h1>
-            <img src="assets/support.png" alt="Browser Support">
-            <img src="assets/mobile.png" alt="Browser Support">
+            <h1 class="upper">Browser support</h1>
+            <div class="support">
+              <div class="browser">
+                <div>IE</div>
+                <div class="red">11</div>
+              </div>
+              <div class="browser">
+                <div>Edge</div>
+                <div class="red">14</div>
+                <div class="red">15</div>
+              </div>
+              <div class="browser">
+                <div>Firefox</div>
+                <div class="red">52</div>
+                <div class="red">53</div>
+                <div class="red">54</div>
+                <div class="red">55</div>
+              </div>
+              <div class="browser">
+                <div>Chrome</div>
+                <div class="lime">56</div>
+                <div class="lime">57</div>
+                <div class="lime">58</div>
+                <div class="lime">59</div>
+              </div>
+              <div class="browser">
+                <div>Safari</div>
+                <div class="red">10</div>
+                <div class="lime">10.1</div>
+                <div class="lime">TP</div>
+              </div>
+              <div class="browser">
+                <div>Opera</div>
+                <div class="green">43</div>
+                <div class="green">44</div>
+                <div class="green">45</div>
+              </div>
+            </div>
+            <div class="support">
+              <div class="browser">
+                <div>IE Mobile</div>
+                <div class="red">11</div>
+              </div>
+              <div class="browser">
+                <div>Opera Mobile</div>
+                <div class="red">37</div>
+              </div>
+              <div class="browser">
+                <div>Firefox for Android</div>
+                <div class="red">51</div>
+              </div>
+              <div class="browser">
+                <div>Chrome for Android</div>
+                <div class="green">56</div>
+              </div>
+              <div class="browser">
+                <div>iOS Safari</div>
+                <div class="red">10.2</div>
+              </div>
+              <div class="browser">
+                <div>Android Browser</div>
+                <div class="red">53</div>
+              </div>
+            </div>
+            <p><small>caniuse.com</small></p>
         </section>
       </x-slide>
       
@@ -154,14 +216,14 @@ class Foo extends HTMLElement {
       <x-slide class="green" in="rotateIn" out="rotateOut">
         <section class="center">
             <x-ascii face="shrug" size="200"></x-ascii>
-            <h1>Polyfill all the things!</h1>
+            <h1 class="upper">Polyfill all the things!</h1>
         </section>
       </x-slide>
 
       <x-slide class="violet" in="rotateIn" out="rotateOut">
         <section class="center">
             <x-ascii face="bear" size="200"></x-ascii>
-            <h1>Thank you!</h1>
+            <h1 class="upper">Thank you!</h1>
         </section>
       </x-slide>
 
