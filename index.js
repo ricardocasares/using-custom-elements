@@ -26,13 +26,21 @@ class BaseElement extends HTMLElement {
   }
 
   attributeChangedCallback (attr, prev, curr) {
-    if (this.connected) {
+    if (this.connected && prev !== curr) {
       this.renderCallback()
     }
   }
 }
 
 // DECK
+
+// @TODO: Self contain and inject all dependencies
+// const CDNJS = 'https://cdnjs.cloudflare.com/ajax/libs/'
+// const HLJS = `${CDNJS}/highlight.js/9.10.0`
+// const HLJS_LIB = `${HLJS}/highlight.min.js`
+// const HLJS_JS_PACK = `${HLJS}/languages/javascript.min.js`
+// const HLJS_CSS = `${HLJS}/styles/atom-one-dark.min.css`
+// const ANIMATE_CSS = `${CDNJS}/animate.css/3.5.2/animate.min.css`
 
 class Deck extends BaseElement {
   constructor () {
@@ -41,6 +49,8 @@ class Deck extends BaseElement {
     this.slides = []
     this.timer = null
     this.current = null
+    this.next = this.next.bind(this)
+    this.handleKeydown = this.handleKeydown.bind(this)
   }
 
   static get observedAttributes () {
@@ -61,7 +71,7 @@ class Deck extends BaseElement {
   }
 
   set autoplay (value) {
-    value ? this.setAttribute('autoplay', ``)
+    value ? this.setAttribute('autoplay', '')
           : this.removeAttribute('autoplay')
   }
 
@@ -77,11 +87,14 @@ class Deck extends BaseElement {
   onConnect () {
     this.collectSlides()
     this.attachNavigation()
+
+    customElements
+      .whenDefined('x-slide')
+      .then(this.activateSlide.bind(this, this.active))
   }
 
   renderCallback () {
     this.autoplayMode()
-    setTimeout(this.activateSlide.bind(this, this.active), 0)
   }
 
   collectSlides () {
@@ -89,14 +102,14 @@ class Deck extends BaseElement {
   }
 
   attachNavigation () {
-    this.addEventListener('click', this.next.bind(this))
-    document.addEventListener('keydown', this.handleKeydown.bind(this))
+    this.addEventListener('click', this.next)
+    document.addEventListener('keydown', this.handleKeydown)
   }
 
   autoplayMode () {
     if (this.autoplay) {
       clearInterval(this.timer)
-      this.timer = setInterval(this.next.bind(this), this.interval * 1000)
+      this.timer = setInterval(this.next, this.interval * 1000)
     }
   }
 
@@ -120,6 +133,7 @@ class Deck extends BaseElement {
         return
       case 39:
         this.next()
+        return;
     }
   }
 
@@ -257,6 +271,10 @@ class FullScreen extends BaseElement {
     super()
 
     this.timeout = null
+    this.isPointerIdle = this.isPointerIdle.bind(this)
+    this.handleKeydown = this.handleKeydown.bind(this)
+    this.toggleFullScreen = this.toggleFullScreen.bind(this)
+    this.hideFullScreenToggle = this.hideFullScreenToggle.bind(this)
   }
 
   static get observedAttributes () {
@@ -269,9 +287,16 @@ class FullScreen extends BaseElement {
 
   onConnect () {
     this.classList.add('animated', 'fadeIn')
-    this.addEventListener('click', this.toggleFullScreen.bind(this))
-    document.addEventListener('mousemove', this.isPointerIdle.bind(this))
+    this.addEventListener('click', this.toggleFullScreen)
+    document.addEventListener('keydown', this.handleKeydown)
+    document.addEventListener('mousemove', this.isPointerIdle)
     this.isPointerIdle()
+  }
+
+  handleKeydown(e) {
+    if (e.keyCode === 13) {
+      this.toggleFullScreen()
+    }
   }
 
   renderCallback () {
@@ -306,7 +331,7 @@ class FullScreen extends BaseElement {
   isPointerIdle () {
     clearTimeout(this.timeout)
     this.showFullScreenToggle()
-    this.timeout = setTimeout(this.hideFullScreenToggle.bind(this), this.delay * 1000)
+    this.timeout = setTimeout(this.hideFullScreenToggle, this.delay * 1000)
   }
 
   hideFullScreenToggle () {
@@ -322,6 +347,7 @@ class FullScreen extends BaseElement {
   disconnectedCallback () {
     clearTimeout(this.timeout)
     this.removeEventListener('click', this.toggleFullScreen)
+    document.removeEventListener('keydown', this.handleKeydown)
     document.removeEventListener('mousemove', this.isPointerIdle)
   }
 }

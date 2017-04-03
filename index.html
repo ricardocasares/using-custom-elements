@@ -2,15 +2,13 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/atom-one-dark.min.css">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/daneden/animate.css/master/animate.css">
     <link rel="stylesheet" href="slides.css">
     <title>Using Custom Elements: From zero to foo</title>
   </head>
   <body>
     <x-fullscreen></x-fullscreen>
 
-    <x-deck>
+    <x-deck active="2">
 
       <x-slide class="teal" in="zoomIn" out="zoomOut">
         <section class="center">
@@ -44,6 +42,36 @@
       </x-slide>
 
       <x-slide class="green">
+        <section class="center">
+          <div class="green huge">✓</div>
+        </section>
+
+        <section>
+          <h1 class="upper">Custom elements do</h1>
+          <ul class="check">
+            <li>Let you define your own HTML tags bundled with JS behavior</li>
+            <li>Trigger lifecycle callbacks</li>
+            <li>Automatically upgrade your tag when inserted in the document</li>
+          </ul>
+        </section>
+      </x-slide>
+
+      <x-slide class="red">
+        <section class="center">
+          <div class="red huge">⃠</div>
+        </section>
+
+        <section>
+          <h1 class="upper">Custom elements don't</h1>
+          <ul class="nope">
+            <li>Scope CSS styles</li>
+            <li>Scope JavaScript</li>
+            <li>Play nice with user defined markup</li>
+          </ul>
+        </section>
+      </x-slide>
+
+      <x-slide class="green">
         <section>
             <h1 class="upper">V1 Specification</h1>
             <p>W3C Editor's Draft 13 February 2017</p>
@@ -52,6 +80,11 @@
             <pre>
               <code class="javascript">
 class Foo extends HTMLElement {
+  static get observedAttributes() {
+    // called when adopted on a new document
+    return ['my', 'attributes']
+  }
+
   adoptedCallback() {
     // called when adopted on a new document
   }
@@ -230,8 +263,8 @@ const fooButton = document.createElement('button', {is: 'x-foo'})
 
     </x-deck>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/languages/javascript.min.js"></script>
+    <script src="high.js"></script>
+    <script src="high-js.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
     <script src="index.js"></script>
   </body>
