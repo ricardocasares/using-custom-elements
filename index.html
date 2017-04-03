@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="slides.css">
+    <link rel="stylesheet" href="css/slides.css">
     <title>Using Custom Elements: From zero to foo</title>
   </head>
   <body>
@@ -263,9 +263,13 @@ const fooButton = document.createElement('button', {is: 'x-foo'})
 
     </x-deck>
 
-    <script src="high.js"></script>
-    <script src="high-js.js"></script>
+    <script src="lib/high.js"></script>
+    <script src="lib/high-js.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="index.js"></script>
+    <script src="src/base.js"></script>
+    <script src="src/deck.js"></script>
+    <script src="src/slide.js"></script>
+    <script src="src/ascii.js"></script>
+    <script src="src/fullscreen.js"></script>
   </body>
 </html>
