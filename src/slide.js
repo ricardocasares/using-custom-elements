@@ -12,7 +12,7 @@ class Slide extends BaseElement {
 
   set active (value) {
     value ? this.setAttribute('active', '')
-            : this.removeAttribute('active')
+          : this.removeAttribute('active')
   }
 
   get in () {
