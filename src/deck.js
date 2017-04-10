@@ -24,7 +24,7 @@ class Deck extends BaseElement {
   }
 
   get active () {
-    return parseInt(window.location.hash.replace('#', ''), 10) || 0
+    return parseInt(this.getAttribute('active') || window.location.hash.replace('#', ''), 10) || 0
   }
 
   set active (idx) {
