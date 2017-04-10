@@ -24,15 +24,8 @@ class Slide extends BaseElement {
   }
 
   onConnect() {
-    this.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      `
-
     this.classList.add('animated')
+    Object.assign(this.style, this.inlineCSS())
   }
 
   renderCallback () {
@@ -42,6 +35,22 @@ class Slide extends BaseElement {
     } else {
       this.classList.add(this.out)
       this.classList.remove(this.in)
+    }
+  }
+
+  inlineCSS() {
+    return {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      display: 'flex',
+      width: '100%',
+      height: '100%',
+      background: 'black',
+      fontFamily: 'BlinkMacSystemFont, sans-serif',
+      borderWidth: '30px',
+      borderStyle: 'solid',
+      padding: '100px'
     }
   }
 }
