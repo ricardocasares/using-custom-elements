@@ -9,17 +9,8 @@ body {
 
 /* CUSTOM ELEMENTS */
 
-x-slide {
-    display: flex;
-    background: black;
-    color: white;
-    font-family: BlinkMacSystemFont, sans-serif;
-    border: 30px solid white;
-    padding: 100px;
-    position: relative;
-}
-
-x-slide section {
+x-slide section,
+x-rolling section {
     flex-grow: 1;
 }
 
