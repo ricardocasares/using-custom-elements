@@ -17,6 +17,9 @@ class RollingSlide extends Slide {
   inlineCSS () {
       return Object.assign(super.inlineCSS(), {
           textAlign: 'center',
+          borderColor: 'black',
+          backgroundColor: 'white',
+          color: 'black',
           backgroundImage: 'url(https://rollingscopes.com/images/logo_rs_text.svg)',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: '2% 98%'
