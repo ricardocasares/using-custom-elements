@@ -20,9 +20,10 @@ class RollingSlide extends Slide {
           borderColor: 'black',
           backgroundColor: 'white',
           color: 'black',
-          backgroundImage: 'url(https://rollingscopes.com/images/logo_rs_text.svg)',
+          backgroundImage: 'url(/scopes.svg)',
           backgroundRepeat: 'no-repeat',
-          backgroundPosition: '2% 98%'
+          backgroundPosition: '2% 98%',
+          border: 'none'
       })
   }
 }
