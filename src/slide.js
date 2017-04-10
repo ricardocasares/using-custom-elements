@@ -23,11 +23,7 @@ class Slide extends BaseElement {
     return this.getAttribute('out') || DEFAULT_OUT
   }
 
-  renderCallback () {
-    this.attachStyles()
-  }
-
-  attachStyles () {
+  onConnect() {
     this.style.cssText = `
         position: fixed;
         top: 0;
@@ -35,8 +31,11 @@ class Slide extends BaseElement {
         width: 100%;
         height: 100%;
       `
-    this.classList.add('animated')
 
+    this.classList.add('animated')
+  }
+
+  renderCallback () {
     if (this.active) {
       this.classList.add(this.in)
       this.classList.remove(this.out)
