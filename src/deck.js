@@ -12,7 +12,6 @@ class Deck extends BaseElement {
   constructor () {
     super()
 
-    this.slides = []
     this.timer = null
     this.current = null
     this.next = this.next.bind(this)
@@ -51,21 +50,17 @@ class Deck extends BaseElement {
   }
 
   onConnect () {
-    this.collectSlides()
     this.attachNavigation()
     
     // wait for slides to be defined
-    customElements
-      .whenDefined('x-slide')
-      .then(this.activateSlide.bind(this, this.active))
+    Promise.all([
+      customElements.whenDefined('x-slide'),
+      customElements.whenDefined('x-rolling')
+    ]).then(this.activateSlide.bind(this, this.active))
   }
 
   renderCallback () {
     this.autoplayMode()
-  }
-
-  collectSlides () {
-    this.slides = Array.from(this.querySelectorAll('x-slide'))
   }
 
   attachNavigation () {
@@ -85,7 +80,7 @@ class Deck extends BaseElement {
       this.current.active = false
     }
 
-    this.current = this.slides[idx]
+    this.current = this.children[idx]
     this.current.active = true
     this.active = idx
   }
@@ -106,7 +101,7 @@ class Deck extends BaseElement {
 
   next () {
     let next = this.active + 1
-    let total = this.slides.length - 1
+    let total = this.children.length - 1
 
     if (next <= total) {
       this.activateSlide(next)
@@ -121,7 +116,7 @@ class Deck extends BaseElement {
     if (prev >= 0) {
       this.activateSlide(prev)
     } else {
-      this.activateSlide(this.slides.length - 1)
+      this.activateSlide(this.children.length - 1)
     }
   }
 

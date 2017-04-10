@@ -45,21 +45,21 @@ class FullScreen extends BaseElement {
 
   renderCallback () {
     this.textContent = this.icon
-    this.style.cssText = this.buildStyles()
+    Object.assign(this.style, this.inlineCSS())
   }
 
-  buildStyles () {
-    return `
-      color: #FFF;
-      position: fixed;
-      bottom: 60px;
-      right: 60px;
-      font-size: 100px;
-      z-index: 1000;
-      cursor: pointer;
-      display: block;
-      line-height: 72px;
-    `
+  inlineCSS () {
+    return {
+      color: '#FFF',
+      position: 'fixed',
+      bottom: '60px',
+      right: '60px',
+      fontSize: '100px',
+      zIndex: '1000',
+      cursor: 'pointer',
+      display: 'block',
+      lineHeight: '72px'
+    }
   }
 
   toggleFullScreen () {

@@ -20,7 +20,11 @@ class AsciiFace extends BaseElement {
   }
 
   get size () {
-    return parseFloat(this.getAttribute('size'))
+    if (this.getAttribute('size')) {
+      return `${parseFloat(this.getAttribute('size'))}px`
+    }
+
+    return '120px'
   }
 
   set size (value) {
@@ -46,16 +50,16 @@ class AsciiFace extends BaseElement {
 
   renderCallback () {
     this.innerHTML = this.faces[this.face]
-    this.style.cssText = this.buildStyles()
+    Object.assign(this.style, this.inlineCSS())
   }
 
-  buildStyles () {
-    let styles = []
+  inlineCSS () {
+    let styles = {}
 
-    if (this.color) styles.push(`color: ${this.color};`)
-    if (this.size) styles.push(`font-size: ${this.size}px;`)
+    if (this.color) styles.color = this.color
+    if (this.size) styles.fontSize = this.size
 
-    return styles.join(' ')
+    return styles
   }
 }
 

@@ -13,13 +13,21 @@
 
     <x-deck>
 
-      <x-slide class="teal" in="zoomIn" out="zoomOut">
+      <x-slide class="teal" in="zoomIn" out="rollOut">
         <section class="center">
             <h1 class="big">From zero to <code>&lt;foo&gt;&lt;/foo&gt;</code></h1>
             <h2 class="upper normal">Introduction to Custom Elements v1</h2>
             <x-ascii face="dance" size="150"></x-ascii>
         </section>
       </x-slide>
+
+      <x-rolling class="teal">
+        <section class="center">
+            <h1 class="big">From zero to <code>&lt;foo&gt;&lt;/foo&gt;</code></h1>
+            <h2 class="upper normal">Introduction to Custom Elements v1</h2>
+            <x-ascii face="dance" size="150"></x-ascii>
+        </section>
+      </x-rolling>
 
       <x-slide class="blue" in="zoomIn" out="bounceOut">
         <section>
@@ -269,10 +277,11 @@ const fooButton = document.createElement('button', {is: 'x-foo'})
     <script src="lib/high.js"></script>
     <script src="lib/high-js.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="src/base.js"></script>
-    <script src="src/deck.js"></script>
-    <script src="src/slide.js"></script>
-    <script src="src/ascii.js"></script>
-    <script src="src/fullscreen.js"></script>
+    <script src="src/Base.js"></script>
+    <script src="src/Deck.js"></script>
+    <script src="src/Slide.js"></script>
+    <script src="src/Ascii.js"></script>
+    <script src="src/Fullscreen.js"></script>
+    <script src="src/RollingSlide.js"></script>
   </body>
 </html>
