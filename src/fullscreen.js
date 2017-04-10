@@ -10,7 +10,15 @@ class FullScreen extends BaseElement {
   }
 
   static get observedAttributes () {
-    return ['delay']
+    return ['delay', 'icon']
+  }
+
+  get icon () {
+    return this.getAttribute('icon') || '◱'
+  }
+
+  set icon (value) {
+    this.setAttribute('icon', value)
   }
 
   get delay () {
@@ -36,7 +44,7 @@ class FullScreen extends BaseElement {
   }
 
   renderCallback () {
-    this.textContent = '◱'
+    this.textContent = this.icon
     this.style.cssText = this.buildStyles()
   }
 
