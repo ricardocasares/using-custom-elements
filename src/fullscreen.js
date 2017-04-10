@@ -58,7 +58,8 @@ class FullScreen extends BaseElement {
       zIndex: '1000',
       cursor: 'pointer',
       display: 'block',
-      lineHeight: '72px'
+      lineHeight: '72px',
+      textShadow: `-2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000`
     }
   }
 
