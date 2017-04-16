@@ -25,7 +25,6 @@ class Slide extends BaseElement {
 
   onConnect() {
     this.classList.add('animated')
-    Object.assign(this.style, this.inlineCSS())
   }
 
   renderCallback () {
@@ -38,7 +37,7 @@ class Slide extends BaseElement {
     }
   }
 
-  inlineCSS() {
+  inlineStyles() {
     return {
       position: 'fixed',
       top: 0,

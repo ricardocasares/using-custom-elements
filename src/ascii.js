@@ -50,10 +50,9 @@ class AsciiFace extends BaseElement {
 
   renderCallback () {
     this.innerHTML = this.faces[this.face]
-    Object.assign(this.style, this.inlineCSS())
   }
 
-  inlineCSS () {
+  inlineStyles () {
     let styles = {}
 
     if (this.color) styles.color = this.color

@@ -14,7 +14,7 @@ class RollingSlide extends Slide {
     return this.getAttribute('out') || DEFAULT_OUT_ROLL
   }
 
-  inlineCSS () {
+  inlineStyles () {
       return Object.assign(super.inlineCSS(), {
           textAlign: 'center',
           borderColor: 'black',

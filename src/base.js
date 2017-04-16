@@ -13,18 +13,28 @@ class BaseElement extends HTMLElement {
     // to be overriden by user
   }
 
+  inlineStyles () {
+    // to be overriden by user
+    return {};
+  }
+
   connectedCallback () {
     if (!this.connected) {
       this.onConnect()
       this.connected = true
     }
 
-    this.renderCallback()
+    this.render()
+  }
+
+  render () {
+    Object.assign(this.style, this.inlineStyles())
+    this.renderCallback();
   }
 
   attributeChangedCallback (attr, prev, curr) {
     if (this.connected && prev !== curr) {
-      this.renderCallback()
+      this.render()
     }
   }
 }

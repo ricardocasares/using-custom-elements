@@ -45,10 +45,9 @@ class FullScreen extends BaseElement {
 
   renderCallback () {
     this.textContent = this.icon
-    Object.assign(this.style, this.inlineCSS())
   }
 
-  inlineCSS () {
+  inlineStyles () {
     return {
       color: '#FFF',
       position: 'fixed',
