@@ -14,6 +14,13 @@ x-rolling section {
     flex-grow: 1;
 }
 
+a {
+    text-decoration: none;
+    color: #CCC;
+    border-bottom: 5px solid #333;
+    padding-bottom: 15px;
+}
+
 /* COLORS */
 
 .blue {
@@ -122,10 +129,6 @@ li {
     list-style-type: none;
 }
 
-img {
-    width: 100%;
-    min-width: 100%;
-}
 
 /* TYPOGRAPHY */
 
@@ -140,6 +143,10 @@ p, li {
 
 .big {
     font-size: 260%;
+}
+
+.large {
+    font-size: 350%;
 }
 
 .huge {
