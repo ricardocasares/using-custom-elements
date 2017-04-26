@@ -88,27 +88,23 @@
             <pre>
               <code class="javascript">
 class Foo extends HTMLElement {
+  // called when the element is created or upgraded
+  constructor() {
+    super()
+  }
+  // called when the element is connected to the DOM
+  connectedCallback () {}
+  // called when any attribute changes
+  // triggers before connectedCallback
+  attributeChangedCallback (attr, prev, curr) {}
+  // set of attributes that will trigger the changed callback
   static get observedAttributes() {
-    // called when adopted on a new document
     return ['my', 'attributes']
   }
-
-  adoptedCallback() {
-    // called when adopted on a new document
-  }
-
-  connectedCallback () {
-    // called when the element is connected to DOM
-  }
-
-  attributeChangedCallback (attr, prev, curr) {
-    // called when any attribute changes
-    // triggers before connectedCallback
-  }
-
-  disconnectedCallback () {
-    // called when the element is disconnected from DOM
-  }
+  // called when adopted on a new document
+  adoptedCallback() {}
+  // called when the element is disconnected from the DOM
+  disconnectedCallback () {}
 }
               </code>
             </pre>
@@ -156,7 +152,7 @@ const fooButton = document.createElement('button', {is: 'x-foo'})
               </code></pre>
             
               <pre><code class="html">
-&lt;button is="x-foo"&gt;&lt;/button&gt;
+&lt;x-foo&gt;&lt;/x-foo&gt; or &lt;button is="x-foo"&gt;&lt;/button&gt;
               </code></pre>
         </section>
         <section class="center">
